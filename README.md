@@ -32,12 +32,16 @@ FeeLure is a community reporting portal for **suspected dark patterns, hidden fe
 
 FeeLure stores its SQLite database and uploaded screenshots in one directory (`FEELURE_DATA_DIR`, default `./data`). The host **must provide a persistent writable volume** — a serverless/ephemeral filesystem will silently lose reports.
 
-Railway (used for the demo deployment):
+Railway:
 1. Push this repo to GitHub.
 2. railway.com → New Project → Deploy from GitHub repo → pick `FeeLure`.
 3. Add a **Volume** mounted at `/data`.
 4. Variables: `FEELURE_DATA_DIR=/data`, `GEMINI_API_KEY=<your key>`, `NODE_VERSION=22`.
 5. Deploy; `railway.json` handles build/start and the `/` healthcheck.
+
+## Status & known limitations
+
+All features below were verified **locally** (dev server + production build on Windows, Node 24): report create/read/list, screenshot upload & serving, voting, SQLite persistence across server restarts, Gemini screenshot analysis with a real API key, and the labelled demo showcase. At submission time the app has **not yet been verified on a public deployment** — until that's done, treat public-URL behaviour (volume persistence across redeploys, Gemini under cloud egress, production `next start`) as untested. Other limitations: no authentication or admin moderation (by design, v1); vote deduplication is a per-IP cooldown, not per-account; AI findings are advisory only and human-reviewed before publishing; FeeLure never inspects live websites.
 
 ## Getting started
 
