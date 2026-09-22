@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+/*
+ * FeeLure design tokens (Tailwind CSS v4 @theme).
+ * Modern navy + white + amber consumer-safety palette.
+ */
+@theme {
+  --color-navy-50: #f4f6fb;
+  --color-navy-100: #e5eaf4;
+  --color-navy-200: #c3cfe6;
+  --color-navy-300: #93a8ce;
+  --color-navy-400: #607db1;
+  --color-navy-500: #40619a;
+  --color-navy-600: #2f4c7f;
+  --color-navy-700: #273e68;
+  --color-navy-800: #1e3050;
+  --color-navy-900: #16243c;
+  --color-navy-950: #0d1728;
+
+  --color-amber-50: #fff8eb;
+  --color-amber-100: #feefc7;
+  --color-amber-200: #fddc8a;
+  --color-amber-300: #fcc42d;
+  --color-amber-400: #f5b301;
+  --color-amber-500: #d99700;
+  --color-amber-600: #b87500;
+  --color-amber-700: #945703;
+  --color-amber-800: #7a460a;
+  --color-amber-900: #66390c;
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-navy-50);
+  color: var(--color-navy-900);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Consistent visible focus for keyboard users across the whole app. */
+:focus-visible {
+  outline: 2px solid var(--color-amber-500);
+  outline-offset: 2px;
+}
