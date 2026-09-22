@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "description": "FeeLure — See the catch before you click. A community index of suspected dark patterns and hidden fees.",
+  "engines": {
+    "node": ">=22.5"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

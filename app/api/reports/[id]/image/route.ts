@@ -2,7 +2,7 @@ import { readFile } from "fs/promises";
 import path from "path";
 import { NextResponse } from "next/server";
 import { getReport } from "@/lib/reports";
-import { StorageUnavailableError } from "@/lib/db";
+import { StorageUnavailableError, DATA_DIR } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 
@@ -34,7 +34,7 @@ export async function GET(
       return NextResponse.json({ error: "Not found." }, { status: 404 });
     }
 
-    const filePath = path.join(process.cwd(), "data", "uploads", safeName);
+    const filePath = path.join(DATA_DIR, "uploads", safeName);
     const buffer = await readFile(filePath);
     return new NextResponse(new Uint8Array(buffer), {
       status: 200,

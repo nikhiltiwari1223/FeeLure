@@ -14,6 +14,15 @@ import { mkdirSync } from "fs";
 import path from "path";
 import { DatabaseSync } from "node:sqlite";
 
+/**
+ * Where the SQLite database + uploaded screenshots live.
+ * On hosts with a mounted persistent volume (e.g. Railway), set
+ * FEELURE_DATA_DIR to the mount path; defaults to <project>/data locally.
+ */
+export const DATA_DIR = process.env.FEELURE_DATA_DIR
+  ? path.resolve(process.env.FEELURE_DATA_DIR)
+  : path.join(process.cwd(), "data");
+
 let dbInstance: DatabaseSync | null = null;
 
 /** Thrown when the database cannot be opened or queried. */
@@ -29,10 +38,9 @@ export function getDb(): DatabaseSync {
   if (dbInstance) return dbInstance;
 
   try {
-    const dataDir = path.join(process.cwd(), "data");
-    mkdirSync(dataDir, { recursive: true });
+    mkdirSync(DATA_DIR, { recursive: true });
 
-    const db = new DatabaseSync(path.join(dataDir, "feelure.db"));
+    const db = new DatabaseSync(path.join(DATA_DIR, "feelure.db"));
 
     // WAL mode: safe concurrent reads while a write happens.
     db.exec("PRAGMA journal_mode = WAL;");

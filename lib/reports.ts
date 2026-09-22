@@ -7,7 +7,7 @@
 import { randomUUID } from "crypto";
 import { unlink } from "fs/promises";
 import path from "path";
-import { getDb, StorageUnavailableError } from "./db";
+import { getDb, StorageUnavailableError, DATA_DIR } from "./db";
 import {
   isCategory,
   MAX_DESCRIPTION_LENGTH,
@@ -223,7 +223,7 @@ export async function deleteReportImage(id: string): Promise<void> {
   const report = getReport(id);
   if (!report?.imageFile) return;
   try {
-    await unlink(path.join(process.cwd(), "public", "uploads", report.imageFile));
+    await unlink(path.join(DATA_DIR, "uploads", report.imageFile));
   } catch {
     // file already gone — fine
   }

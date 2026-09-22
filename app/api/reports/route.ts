@@ -9,7 +9,7 @@ import {
   setReportImage,
   validateReportInput,
 } from "@/lib/reports";
-import { StorageUnavailableError } from "@/lib/db";
+import { StorageUnavailableError, DATA_DIR } from "@/lib/db";
 import { isSortKey, MAX_UPLOAD_BYTES } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -113,7 +113,7 @@ export async function POST(request: Request) {
     // Save the optional screenshot to data/uploads and link it in the DB.
     if (screenshot) {
       try {
-        const uploadsDir = path.join(process.cwd(), "data", "uploads");
+        const uploadsDir = path.join(DATA_DIR, "uploads");
         await mkdir(uploadsDir, { recursive: true });
         const fileName = `${reportId}.${ALLOWED_IMAGE_TYPES[screenshot.type]}`;
         const bytes = Buffer.from(await screenshot.arrayBuffer());
