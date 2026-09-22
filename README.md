@@ -60,6 +60,21 @@ Other scripts:
 npm run build      # production build
 npm run start      # serve the production build
 npm run typecheck  # TypeScript, no emit
+npm test           # data-layer + Gemini contract tests (no network, no key)
+```
+
+## Testing
+
+`npm test` compiles `lib/` + `tests/` with a dedicated tsconfig and runs them with Node's built-in test runner (`node --test`) — zero external test dependencies.
+
+- **Isolation:** every run points `FEELURE_DATA_DIR` at a fresh temp directory (`tests/setup.ts`), so tests never read or modify real user data in `./data`.
+- **Coverage:** report validation, creation, retrieval, listing/filter/sorting, voting (including cooldown enforcement), and persistence across a process restart against the same database; plus the Gemini analysis prompt contract and the defensive response parser.
+- **No network, no secrets:** Gemini's HTTP API is never called in tests — the route is exercised through its pure pieces with mocked model output, and no API key is read or required.
+
+Run a single suite:
+
+```bash
+npx tsc -p tsconfig.test.json && node --test .test-build/tests/reports.test.js
 ```
 
 ## Project structure

@@ -18,6 +18,10 @@ data/
 public/uploads/*
 !public/uploads/.gitkeep
 
+# compiled test build output
+.test-build/
+.persistence-check.cjs
+
 # misc
 .DS_Store
 Thumbs.db
