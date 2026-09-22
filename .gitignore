@@ -14,6 +14,10 @@ out/
 # local SQLite database + uploaded screenshots (regenerated at runtime)
 data/
 
+# user-uploaded screenshots stay out of git
+public/uploads/*
+!public/uploads/.gitkeep
+
 # misc
 .DS_Store
 Thumbs.db
